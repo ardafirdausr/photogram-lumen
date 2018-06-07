@@ -18,8 +18,14 @@ class FollowTableSeeder extends Seeder
                     $follow = $u->hasFollow()->toggle([
                         $followedUser
                     ]);    
-                    $u->hasProfile()->increment('total_following');
-                    App\Models\User::find($followedUser)->hasProfile()->increment('total_follower');                                    
+                    if($follow['attached']){
+                        $u->hasProfile()->increment('total_following');
+                        App\Models\User::find($followedUser)->hasProfile()->increment('total_follower');                                                
+                    }
+                    else{
+                        $u->hasProfile()->decrement('total_following');
+                        App\Models\User::find($followedUser)->hasProfile()->decrement('total_follower');                                                
+                    }
                 }
             }
         });
