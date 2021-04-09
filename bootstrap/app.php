@@ -5,7 +5,7 @@ require_once __DIR__.'/../vendor/autoload.php';
 try {
     (new Dotenv\Dotenv(__DIR__.'/../'))->load();
 } catch (Dotenv\Exception\InvalidPathException $e) {
-    //
+    echo "no .env files";
 }
 
 /*
@@ -23,9 +23,11 @@ $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
-// $app->withFacades();
+//autoload Facade
+$app->withFacades();
 
-// $app->withEloquent();
+// USE eloquent`
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -63,9 +65,9 @@ $app->singleton(
 //    App\Http\Middleware\ExampleMiddleware::class
 // ]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+$app->routeMiddleware([
+    'auth' => App\Http\Middleware\Authenticate::class,
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -93,6 +95,7 @@ $app->singleton(
 |
 */
 
+// location of controller
 $app->router->group([
     'namespace' => 'App\Http\Controllers',
 ], function ($router) {
