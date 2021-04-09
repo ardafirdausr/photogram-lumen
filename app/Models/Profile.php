@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model{
 
-    protected $fillable = ['total_post', 'total_follower', 'total_following', 'bio'];
+    protected $table = 'profiles';
+    protected $fillable = ['bio'];
 
-    public function ownedBy(){
+    public function user(){
         return $this->belongsTo(User::class, 'id');
     }
 

@@ -13,11 +13,11 @@ class LikeTableSeeder extends Seeder
     {
         App\Models\Post::get()->each(function($p){
             for($i = 1; $i <= rand(4, 5); $i++){
-                $randomUser = App\Models\User::inRandomOrder()->first()->id;                
-                $p->likedBy()->firstOrCreate([
+                $randomUser = App\Models\User::inRandomOrder()->first()->id;          
+                // write in polymorphism table      
+                $p->likes()->firstOrCreate([
                     'user_id' => $randomUser,
-                ]);
-                $p->increment('like');
+                ]);                
             }
         });        
     }

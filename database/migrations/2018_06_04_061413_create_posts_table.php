@@ -20,8 +20,6 @@ class CreatePostsTable extends Migration
             $table->string('caption')->nullable(false);
             $table->string('latitude');
             $table->string('longitude');
-            $table->integer('like')->default(0);            
-            $table->integer('comment')->default(0);            
             $table->integer('user_id')->unsigned();
             $table->timestamps();
             //constraint

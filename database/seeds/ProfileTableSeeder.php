@@ -13,7 +13,7 @@ class ProfileTableSeeder extends Seeder
     {
         App\Models\User::get()->each(function($u){
             // insert profile each User
-            $u->hasProfile()->save(factory(App\Models\Profile::class, 'createBio')->make());            
+            $u->profile()->save(factory(App\Models\Profile::class, 'createBio')->make());            
         });
 
     }

@@ -15,10 +15,7 @@ class CreateProfilesTable extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             //schema
-            $table->increments('id');
-            $table->integer('total_post')->default(0);
-            $table->integer('total_follower')->default(0);
-            $table->integer('total_following')->default(0);
+            $table->increments('id');            
             $table->string('bio')->default('');
             $table->integer('user_id')->unsigned();
             $table->timestamps();

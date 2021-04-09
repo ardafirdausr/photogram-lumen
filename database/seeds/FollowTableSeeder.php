@@ -15,17 +15,7 @@ class FollowTableSeeder extends Seeder
             for($i = 0; $i <= rand(4, 9); $i++ ){
                 $followedUser = App\Models\User::inRandomOrder()->first()->id;
                 if($followedUser !== $u->id){
-                    $follow = $u->hasFollow()->toggle([
-                        $followedUser
-                    ]);    
-                    if($follow['attached']){
-                        $u->hasProfile()->increment('total_following');
-                        App\Models\User::find($followedUser)->hasProfile()->increment('total_follower');                                                
-                    }
-                    else{
-                        $u->hasProfile()->decrement('total_following');
-                        App\Models\User::find($followedUser)->hasProfile()->decrement('total_follower');                                                
-                    }
+                    $follow = $u->follows()->toggle([$followedUser]);                                            
                 }
             }
         });

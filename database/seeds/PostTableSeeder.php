@@ -11,14 +11,14 @@ class PostTableSeeder extends Seeder
      */
     public function run()
     {
-        App\Models\User::get()->each(function ($u){            
-            for($i = 1; $i <= rand(2, 4); $i++){
-                // insert post each User             
-                $u->hasPost()->save(factory(App\Models\Post::class, 'createPost')->make());
-                // insert profile total_post 
-                $u->hasProfile()->increment('total_post');                
-                // craete                 
-            }            
+        App\Models\User::all()->each(function ($u){
+            // insert post each User        
+            // save() use to save/insert new Instance Model     
+            // make() generate collection
+            // craete() creating instance                        
+            // $post = factory(App\Models\Post::class, 'createPost')->make();
+            // $u->posts()->save($post);                
+            $u->posts()->saveMany(factory(App\Models\Post::class, 'createPost', 3)->make());            
         }); 
 
     }
